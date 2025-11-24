@@ -13,22 +13,18 @@ steps:
       - "push"
       - "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}"
 
-  # Step 3: Deploy to Cloud Run
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: "gcloud"
-    args:
-      - "run"
-      - "deploy"
-      - "${_SERVICE_NAME}"
-      - "--image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}"
-      - "--region=${_REGION}"
-      - "--platform=managed"
-      - "--service-account=${_SERVICE_ACCOUNT}"
-      - "--allow-unauthenticated"
-      - "--set-env-vars=DB_USER=${_DB_USER}"
-      - "--set-env-vars=DB_PASS=${_DB_PASS}"
-      - "--set-env-vars=DB_NAME=${_DB_NAME}"
-      - "--set-env-vars=CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}"
+  # Step 3: Deploy to Cloud Run- name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  entrypoint: "gcloud"
+  args:
+    - "run"
+    - "deploy"
+    - "${_SERVICE_NAME}"
+    - "--image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}"
+    - "--region=${_REGION}"
+    - "--platform=managed"
+    - "--service-account=${_SERVICE_ACCOUNT}"
+    - "--allow-unauthenticated"
+    - "--set-env-vars=DB_USER=${_DB_USER},DB_PASS=${_DB_PASS},DB_NAME=${_DB_NAME},CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}"
 
 images:
   - "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}"
