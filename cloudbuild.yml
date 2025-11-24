@@ -43,4 +43,4 @@ substitutions:
   _CLOUDSQL_CONNECTION_NAME: 'sureel-test:us-central1:todo-app-db'
   _DB_USER: 'root'
   _DB_PASS: 'Todo-app12345'
-  _DB_NAME: 'todo-app-db'
+  _DB_NAME: 'todo_db'
