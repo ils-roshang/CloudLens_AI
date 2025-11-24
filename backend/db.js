@@ -1,20 +1,17 @@
-const mysql = require('@google-cloud/sqlcommenter-sequelize').mysql;
-const { Connector } = require('@google-cloud/cloud-sql-connector');
-require('dotenv').config();
+const mysql = require("mysql2/promise");
 
-const connector = new Connector();
+let pool;
 
 async function getPool() {
-  const clientOpts = await connector.getOptions({
-    instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
-    ipType: 'PUBLIC'
-  });
+  if (pool) return pool;
 
-  const pool = mysql.createPool({
-    ...clientOpts,
+  pool = mysql.createPool({
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
+    waitForConnections: true,
+    connectionLimit: 5,
   });
 
   return pool;
