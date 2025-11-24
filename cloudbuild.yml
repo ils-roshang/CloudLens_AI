@@ -13,7 +13,8 @@ steps:
       - "push"
       - "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}"
 
-  # Step 3: Deploy to Cloud Run- name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  # Step 3: Deploy to Cloud Run
+- name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
   entrypoint: "gcloud"
   args:
     - "run"
