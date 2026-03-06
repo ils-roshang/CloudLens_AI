@@ -349,42 +349,22 @@ By enabling users to ask questions about their infrastructure and receive real-t
 
 
 
-[ User ]
-   │
-   ▼
-1. Asks a question in plain English 
-   (e.g., "Which compute instances are idle?")
-   │
-   ▼
-[ AI Query Engine ]
-   │
-   ▼
-2. Interprets the natural language query & identifies the required cloud data
-   │
-   ▼
-[ Cloud Integration Layer ]
-   │
-   ▼
-3. Connects securely to the relevant cloud provider (AWS / GCP / Azure)
-   │
-   ▼
-[ Resource Discovery & Metrics Engine ]
-   │
-   ▼
-4. Retrieves live infrastructure data, configuration, and operational metrics
-   │
-   ▼
-[ AI Analysis Engine ]
-   │
-   ▼
-5. Analyzes the raw data to find issues, costs, security risks, or bottlenecks
-   │
-   ▼
-[ CloudLens Dashboard ]
-   │
-   ▼
-6. Generates a clear response with data and specific optimization recommendations
-   │
-   ▼
-[ User ]
+## Workflow Chart
 
+```mermaid
+flowchart TD
+    user([User])
+    ai[AI Query Engine]
+    integration[Cloud Integration Layer]
+    metrics[Resource Discovery & Metrics Engine]
+    analysis[AI Analysis Engine]
+    dashboard[CloudLens Dashboard]
+    user_end([User])
+
+    user -->|"1. Asks a question in plain English<br>(e.g., 'Which compute instances are idle?')"| ai
+    ai -->|"2. Interprets the natural language query<br>& identifies the required cloud data"| integration
+    integration -->|"3. Connects securely to the relevant<br>cloud provider (AWS / GCP / Azure)"| metrics
+    metrics -->|"4. Retrieves live infrastructure data,<br>configuration, and operational metrics"| analysis
+    analysis -->|"5. Analyzes the raw data to find issues,<br>costs, security risks, or bottlenecks"| dashboard
+    dashboard -->|"6. Generates a clear response with data<br>and specific optimization recommendations"| user_end
+```
